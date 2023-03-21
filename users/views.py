@@ -1,3 +1,7 @@
-from django.shortcuts import render
+from .serializers import *
+from rest_framework import viewsets
 
-# Create your views here.
+
+class PassUserViewSet(viewsets.ModelViewSet):
+    queryset = PassUser.objects.all()
+    serializer_class = PassUserSerializer
