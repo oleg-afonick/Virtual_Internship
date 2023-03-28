@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'drf_yasg',
     'users.apps.UsersConfig',
+    'pereval.apps.PerevalConfig',
 ]
 
 MIDDLEWARE = [

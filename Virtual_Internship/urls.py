@@ -23,5 +23,5 @@ router.register(r'user', PassUserViewSet, basename='user')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/v1/', include(router.urls)),
+    path('submitData/', include(router.urls)),
 ]
