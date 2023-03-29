@@ -33,8 +33,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'users.apps.UsersConfig',
+    'pereval.apps.PerevalConfig',
     'rest_framework',
     'drf_yasg',
+
 ]
 
 MIDDLEWARE = [
