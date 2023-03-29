@@ -9,7 +9,7 @@ class Coords(models.Model):
     height = models.IntegerField(verbose_name="Высота", blank=True, null=True)
 
     def __str__(self):
-        return f"{self.latitude} {self.longitude} {self.height}"
+        return f"широта: {self.latitude}, долгота: {self.longitude}, высота: {self.height}"
 
     class Meta:
         verbose_name = "Координаты"
@@ -22,8 +22,12 @@ class Level(models.Model):
     autumn = models.CharField(max_length=10, verbose_name='Осень', blank=True, null=True)
     spring = models.CharField(max_length=10, verbose_name='Весна', blank=True, null=True)
 
+    class Meta:
+        verbose_name = "Уровень сложности"
+        verbose_name_plural = "Уровни сложности"
+
     def __str__(self):
-        return f"{self.winter} {self.summer} {self.autumn} {self.spring}"
+        return f"зима: {self.winter}, весна: {self.spring}, лето: {self.summer}, осень: {self.autumn}"
 
 
 class Pereval(models.Model):
@@ -48,6 +52,10 @@ class Pereval(models.Model):
     status = models.CharField(max_length=10, choices=STATUS, default=new)
     connect = models.TextField(blank=True, null=True)
 
+    class Meta:
+        verbose_name = "Перевал"
+        verbose_name_plural = "Перевалы"
+
     def __str__(self):
         return f"{self.pk}: {self.beauty_title}"
 
@@ -57,6 +65,10 @@ class Images(models.Model):
     data = models.ImageField(upload_to=get_path_upload_photos, verbose_name="Изображение", blank=True, null=True)
     title = models.CharField(max_length=255, verbose_name="Название", blank=True, null=True)
     date_added = models.DateField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = "Изображение"
+        verbose_name_plural = "Изображения"
 
     def __str__(self):
         return f"{self.pk}: {self.title}"
