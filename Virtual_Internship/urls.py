@@ -15,13 +15,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from users.views import *
+from pereval.views import *
 from rest_framework import routers
+from .yasg import urlpatterns as doc_urls
 
 router = routers.DefaultRouter()
-router.register(r'user', PassUserViewSet, basename='user')
+router.register(r'pereval', PerevalViewSet, basename='pereval')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('submitData/', include(router.urls)),
 ]
+
+urlpatterns += doc_urls
