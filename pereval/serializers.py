@@ -6,13 +6,13 @@ from .models import *
 class CoordsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Coords
-        fields = '__all__'
+        fields = ('latitude', 'longitude', 'height',)
 
 
 class LevelSerializer(serializers.ModelSerializer):
     class Meta:
         model = Level
-        fields = '__all__'
+        fields = ('winter', 'summer', 'autumn', 'spring',)
 
 
 class ImagesSerializer(serializers.ModelSerializer):
