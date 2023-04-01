@@ -43,3 +43,14 @@ class PerevalViewSet(viewsets.ModelViewSet):
                 'message': 'Ошибка подключения к базе данных',
                 'id': None,
             })
+
+
+class UserEmailPerevalViewSet(viewsets.ModelViewSet):
+    serializer_class = UserEmailPerevalSerializer
+
+    def get_queryset(self):
+        user = PassUser.objects.filter(email=self.kwargs['email']).first()
+        queryset = Pereval.objects.filter(user__email=user.email)
+
+        return queryset
+

@@ -25,6 +25,7 @@ router.register(r'pereval', PerevalViewSet, basename='pereval')
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('submitData/', include(router.urls)),
+    path('submitData/user__email=<str:email>/', UserEmailPerevalViewSet.as_view({'get': 'list'})),
 ]
 
 urlpatterns += doc_urls
