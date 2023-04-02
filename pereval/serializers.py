@@ -6,13 +6,13 @@ from .models import *
 class CoordsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Coords
-        fields = ('latitude', 'longitude', 'height',)
+        fields = '__all__'
 
 
 class LevelSerializer(serializers.ModelSerializer):
     class Meta:
         model = Level
-        fields = ('winter', 'summer', 'autumn', 'spring',)
+        fields = '__all__'
 
 
 class ImagesSerializer(serializers.ModelSerializer):
@@ -20,7 +20,7 @@ class ImagesSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Images
-        fields = ('data', 'title',)
+        fields = ('data', 'title')
 
 
 class PerevalSerializer(serializers.ModelSerializer):
@@ -31,7 +31,9 @@ class PerevalSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Pereval
-        fields = ('id', 'user', 'beauty_title', 'title', 'other_titles', 'connect', 'coords', 'level', 'images', 'status')
+        depth = 1
+        fields = (
+            'id', 'user', 'beauty_title', 'title', 'other_titles', 'connect', 'coords', 'level', 'images', 'status')
 
     def create(self, validated_data, **kwargs):
         user = validated_data.pop('user')
@@ -39,7 +41,13 @@ class PerevalSerializer(serializers.ModelSerializer):
         level = validated_data.pop('level')
         images = validated_data.pop('images')
 
-        user = PassUser.objects.create(**user)
+        pass_user = PassUser.objects.filter(email=user['email'])
+        if pass_user.exists():
+            user_serializer = PassUserSerializer(data=user)
+            user_serializer.is_valid(raise_exception=True)
+            user = user_serializer.save()
+        else:
+            user = PassUser.objects.create(**user)
         coords = Coords.objects.create(**coords)
         level = Level.objects.create(**level)
         pereval = Pereval.objects.create(**validated_data, user=user, coords=coords, level=level, status='new')
@@ -47,9 +55,6 @@ class PerevalSerializer(serializers.ModelSerializer):
         for image in images:
             data = image.pop('data')
             title = image.pop('title')
-            Images.objects.create(pereval=pereval, data=data, title=title)
+            Images.objects.create(data=data, pereval=pereval, title=title)
 
         return pereval
-
-
-
