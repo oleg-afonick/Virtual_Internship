@@ -52,10 +52,4 @@ class PerevalSerializer(serializers.ModelSerializer):
         return pereval
 
 
-class UserEmailPerevalSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Pereval
-        depth = 1
-        fields = ('id', 'user', 'beauty_title', 'title', 'other_titles', 'connect', 'coords', 'level', 'images', 'status')
-
 
