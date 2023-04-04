@@ -1,18 +1,19 @@
 from rest_framework import serializers
 from users.serializers import PassUserSerializer
 from .models import *
+from drf_writable_nested import WritableNestedModelSerializer
 
 
 class CoordsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Coords
-        fields = '__all__'
+        fields = ('latitude', 'longitude', 'height',)
 
 
 class LevelSerializer(serializers.ModelSerializer):
     class Meta:
         model = Level
-        fields = '__all__'
+        fields = ('winter', 'summer', 'autumn', 'spring',)
 
 
 class ImagesSerializer(serializers.ModelSerializer):
@@ -23,7 +24,7 @@ class ImagesSerializer(serializers.ModelSerializer):
         fields = ('data', 'title')
 
 
-class PerevalSerializer(serializers.ModelSerializer):
+class PerevalSerializer(WritableNestedModelSerializer):
     user = PassUserSerializer()
     coords = CoordsSerializer()
     level = LevelSerializer(allow_null=True)
@@ -48,6 +49,7 @@ class PerevalSerializer(serializers.ModelSerializer):
             user = user_serializer.save()
         else:
             user = PassUser.objects.create(**user)
+
         coords = Coords.objects.create(**coords)
         level = Level.objects.create(**level)
         pereval = Pereval.objects.create(**validated_data, user=user, coords=coords, level=level, status='new')
@@ -58,3 +60,18 @@ class PerevalSerializer(serializers.ModelSerializer):
             Images.objects.create(data=data, pereval=pereval, title=title)
 
         return pereval
+
+    def validate(self, data):
+        if self.instance is not None:
+            instance_user = self.instance.user
+            data_user = data.get('user')
+            validating_user_fields = [
+                instance_user.lastname != data_user['lastname'],
+                instance_user.firstname != data_user['firstname'],
+                instance_user.surname != data_user['surname'],
+                instance_user.phone != data_user['phone'],
+                instance_user.email != data_user['email'],
+            ]
+            if data_user is not None and any(validating_user_fields):
+                raise serializers.ValidationError({'Отклонено': 'Нельзя изменять данные пользователя'})
+        return data
