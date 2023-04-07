@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'pereval.apps.PerevalConfig',
     'rest_framework',
     'drf_yasg',
+    'django_filters',
 
 ]
 
@@ -70,18 +71,16 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'Virtual_Internship.wsgi.application'
 
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'pereval_db',
-        'USER':  os.getenv('FSTR_DB_LOGIN'),
+        'USER': os.getenv('FSTR_DB_LOGIN'),
         'PASSWORD': os.getenv('FSTR_DB_PASS'),
-        'HOST':  os.getenv('FSTR_DB_HOST'),
-        'PORT':  os.getenv('FSTR_DB_PORT'),
+        'HOST': os.getenv('FSTR_DB_HOST'),
+        'PORT': os.getenv('FSTR_DB_PORT'),
     },
 }
-
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -97,7 +96,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
 
 LANGUAGE_CODE = 'ru'
 
@@ -117,8 +115,11 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 REST_FRAMEWORK = {
-    'DEFAULT_RENDERER_CLASSES': [
+    'DEFAULT_FILTER_BACKENDS': (
+        'django_filters.rest_framework.DjangoFilterBackend',
+    ),
+    'DEFAULT_RENDERER_CLASSES': (
         'rest_framework.renderers.JSONRenderer',
         'rest_framework.renderers.BrowsableAPIRenderer',
-    ]
+    )
 }

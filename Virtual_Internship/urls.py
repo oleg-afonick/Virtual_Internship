@@ -20,7 +20,7 @@ from rest_framework import routers
 from .yasg import urlpatterns as doc_urls
 
 router = routers.DefaultRouter()
-router.register(r'pereval', PerevalViewSet, basename='pereval')
+router.register(r'', PerevalViewSet, basename='pereval')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
