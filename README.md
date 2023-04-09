@@ -138,7 +138,10 @@ GET /submitData/?user_id__email=<email>
 ______
 
 
-**Документация сгенерирована с помощью пакета `drf-yasg`и доступна по адресу:  http://127.0.0.1:8000/**
+***Документация сгенерирована с помощью пакета `drf-yasg`*** 
+
+*Документация **swagger**: http://127.0.0.1:8000/swagger/*<br/>
+*Документация **redoc**: http://127.0.0.1:8000/redoc/*
 
 ______
 
@@ -146,7 +149,20 @@ ______
 
 1. *Реализовано повторное использование существующего объекта модели `PassUser` при создания нового объекта модели `Pereval`. Если запрос (метод `POST/submitData/`) на добавление записи отправляет пользователь, ранее уже отправлявший такой запрос (определяется по `email`), то для текущей записи используются ранее записанные данные пользователя, а не создается новый пользователь (объект модели `PassUser`).* 
 2. *Для создания и изменения объектов моделей со связанными данными вложенных сериализаторов использован пакет `drf-writable-nested`*
-3. *API опубликован на хостинге **pythonanywhere.com** и доступен по ссылке* https://olegafonick.pythonanywhere.com/submitData/
-4. *Документация **swagger**: https://olegafonick.pythonanywhere.com/swagger/<br/>*
-5. *Документация **redoc**: https://olegafonick.pythonanywhere.com/redoc/*
+
+_______
+
+***Проект опубликован на хостинге pythonanywhere.com***
+
+*API **submitData**: https://olegafonick.pythonanywhere.com/submitData/*<br/>
+*Документация **swagger**: https://olegafonick.pythonanywhere.com/swagger/<br/>*
+*Документация **redoc**: https://olegafonick.pythonanywhere.com/redoc/*
+
+______
+
+***Отчет о покрытии тестами:***
+
+
+![2023-04-10_002254](https://user-images.githubusercontent.com/108303572/230792571-f0b5e03c-b6cd-4263-87a1-b8fb9ab071a4.jpg)
+
 
