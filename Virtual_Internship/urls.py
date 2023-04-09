@@ -17,14 +17,17 @@ from django.contrib import admin
 from django.urls import path, include
 from pereval.views import *
 from rest_framework import routers
+
+from users.views import PassUserViewSet
 from .yasg import urlpatterns as doc_urls
 
 router = routers.DefaultRouter()
-router.register(r'', PerevalViewSet, basename='pereval')
+router.register(r'submitData', PerevalViewSet, basename='pereval')
+router.register(r'user', PassUserViewSet, basename='user')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('submitData/', include(router.urls)),
+    path('', include(router.urls)),
 ]
 
 urlpatterns += doc_urls
