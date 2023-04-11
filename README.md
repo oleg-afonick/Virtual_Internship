@@ -1,7 +1,7 @@
 ![2023-03-29_191705](https://user-images.githubusercontent.com/108303572/228615897-8bd00bcd-cd95-4a56-9783-34211fdf2780.jpg)
 
 # Виртуальная стажировка
-## submitData Rest API
+## Pereval Rest API
 
 Федерации спортивного туризма России [pereval.online](https://pereval.online) (далее - ФСТР) заказала студентам SkillFactory разработать мобильное приложение для Android и IOS, которое упростило бы туристам задачу по отправке данных о перевале и сократило время обработки запроса до трёх дней.
 
@@ -26,7 +26,7 @@ ___
  ***Метод:***
  
 ```
-POST/submitData/
+POST/Pereval/
 ```
  
  *принимает JSON в теле запроса с информацией о перевале. Пример JSON-а:*
@@ -103,7 +103,7 @@ ______
  ***Метод:*** 
 
 ```
-GET /submitData/<id>
+GET /Pereval/<id>
 ```
 *получает одну запись (перевал) по её id с выведением всей информацию об перевале, в том числе статус модерации.*
 
@@ -112,7 +112,7 @@ ____
 ***Метод:***
 
 ```
-PATCH /submitData/<id>
+PATCH /Pereval/<id>
 ```
 
 *позволяет отредактировать существующую запись (замена), при условии что она в статусе "new". При этом редактировать можно все поля, кроме тех, что содержат ФИО, адрес почты и номер телефона. В качестве результата изменения приходит ответ содержащий следующие данные:*
@@ -128,7 +128,7 @@ _____
 ***Метод:***
    
 ```
-GET /submitData/?user_id__email=<email>
+GET /Pereval/?user_id__email=<email>
 ```
 
 *позволяет получить данные всех объектов, отправленных на сервер пользователем с почтой.* 
@@ -154,7 +154,7 @@ _______
 
 ***Проект опубликован на хостинге pythonanywhere.com***
 
-*API **submitData**: https://olegafonick.pythonanywhere.com/submitData/*<br/>
+*API **submitData**: https://olegafonick.pythonanywhere.com/Pereval/*<br/>
 *Документация **swagger**: https://olegafonick.pythonanywhere.com/swagger/<br/>*
 *Документация **redoc**: https://olegafonick.pythonanywhere.com/redoc/*
 
