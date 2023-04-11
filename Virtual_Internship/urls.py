@@ -22,8 +22,8 @@ from users.views import PassUserViewSet
 from .yasg import urlpatterns as doc_urls
 
 router = routers.DefaultRouter()
-router.register(r'submitData', PerevalViewSet, basename='pereval')
-router.register(r'user', PassUserViewSet, basename='user')
+router.register(r'Pereval', PerevalViewSet, basename='pereval')
+router.register(r'User', PassUserViewSet, basename='user')
 
 urlpatterns = [
     path('admin/', admin.site.urls),

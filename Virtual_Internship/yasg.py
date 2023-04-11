@@ -5,10 +5,10 @@ from drf_yasg import openapi
 
 schema_view = get_schema_view(
     openapi.Info(
-        title="Mountain Passes",
+        title='Rest API для сайта Федерации спортивного туризма России',
         default_version='v1',
-        description="Testing the submitData Rest API",
-        license=openapi.License(name="BSD License"),
+        description='Методы создания, получения и редактирования отчётов туристов о преодолении горных перевалов',
+        license=openapi.License(name='pereval.online'),
     ),
     public=True,
     permission_classes=(permissions.AllowAny,),
